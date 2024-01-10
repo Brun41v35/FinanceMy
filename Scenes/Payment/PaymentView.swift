@@ -12,39 +12,17 @@ final class PaymentView: UIView {
         return stackView
     }()
 
-    private lazy var paymentNameTextField: UITextField = {
-        let textField = UITextField()
+    private lazy var paymentNameTextField: FYTextField = {
+        let textField = FYTextField()
         textField.placeholder = "Pagamento"
-        textField.textAlignment = .center
-        textField.layer.cornerRadius = 8
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.gray.cgColor
-        textField.textColor = .label
-        textField.tintColor = .label
-        textField.font = UIFont.preferredFont(forTextStyle: .title2)
-        textField.adjustsFontSizeToFitWidth = true
-        textField.minimumFontSize = 12
-        textField.backgroundColor = .systemBackground
         textField.returnKeyType = .next
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
 
-    private lazy var paymentValueTextField: UITextField = {
-        let textField = UITextField()
+    private lazy var paymentValueTextField: FYTextField = {
+        let textField = FYTextField()
         textField.placeholder = "Valor"
-        textField.textAlignment = .center
-        textField.layer.cornerRadius = 8
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.gray.cgColor
-        textField.textColor = .label
-        textField.tintColor = .label
-        textField.font = UIFont.preferredFont(forTextStyle: .title2)
-        textField.adjustsFontSizeToFitWidth = true
-        textField.minimumFontSize = 12
-        textField.backgroundColor = .systemBackground
         textField.returnKeyType = .done
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
 
