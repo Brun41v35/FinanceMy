@@ -31,7 +31,7 @@ final class PaymentView: UIView {
         button.setTitle("Confirmar", for: .normal)
         button.layer.cornerRadius = 10
         button.titleLabel?.textColor = .white
-        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.backgroundColor = .systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

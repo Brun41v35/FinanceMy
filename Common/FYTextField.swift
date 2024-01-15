@@ -23,7 +23,7 @@ final class FYTextField: UITextField {
         layer.borderColor = UIColor.gray.cgColor
         textColor = .label
         tintColor = .label
-        font = UIFont.preferredFont(forTextStyle: .title2)
+        font = UIFont.systemFont(ofSize: 20)
         adjustsFontSizeToFitWidth = true
         minimumFontSize = 12
         backgroundColor = .systemBackground

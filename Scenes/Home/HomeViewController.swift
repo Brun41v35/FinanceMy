@@ -33,7 +33,8 @@ final class HomeViewController: UIViewController {
 
     @objc
     private func didTapAddPaymentButton() {
-        print("Button pressed")
+        let controller = PaymentViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
