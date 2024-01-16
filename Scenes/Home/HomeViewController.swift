@@ -70,7 +70,7 @@ extension HomeViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "Payment"
         return cell
     }
@@ -78,6 +78,4 @@ extension HomeViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension HomeViewController: UITableViewDelegate {
-    
-}
+extension HomeViewController: UITableViewDelegate {}

@@ -86,5 +86,6 @@ extension HomeView: HomeViewType {
               delegate: UITableViewDelegate) {
         tableView.dataSource = dataSource
         tableView.delegate = delegate
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 }
