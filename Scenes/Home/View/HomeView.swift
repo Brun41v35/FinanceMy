@@ -1,5 +1,10 @@
 import UIKit
 
+protocol HomeViewType where Self: UIView {
+    func show(dataSource: UITableViewDataSource,
+              delegate: UITableViewDelegate)
+}
+
 final class HomeView: UIView {
 
     // MARK: - Private Properties
@@ -69,5 +74,17 @@ final class HomeView: UIView {
 
     private func setupBackgroundColor() {
         backgroundColor = .systemBackground
+    }
+}
+
+
+// MARK: - HomeViewType
+
+extension HomeView: HomeViewType {
+
+    func show(dataSource: UITableViewDataSource,
+              delegate: UITableViewDelegate) {
+        tableView.dataSource = dataSource
+        tableView.delegate = delegate
     }
 }
