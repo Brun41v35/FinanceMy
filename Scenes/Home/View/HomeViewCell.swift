@@ -65,7 +65,6 @@ final class HomeViewCell: UITableViewCell {
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4)
-//            containerView.heightAnchor.constraint(equalToConstant: 50)
         ])
 
         NSLayoutConstraint.activate([
