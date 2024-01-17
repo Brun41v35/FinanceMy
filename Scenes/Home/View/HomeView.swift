@@ -1,10 +1,5 @@
 import UIKit
 
-protocol HomeViewType where Self: UIView {
-    func show(dataSource: UITableViewDataSource,
-              delegate: UITableViewDelegate)
-}
-
 final class HomeView: UIView {
 
     // MARK: - Private Properties
@@ -20,12 +15,14 @@ final class HomeView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.adjustsFontForContentSizeCategory = true
+        label.text = "TestTest"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private let tableView: UITableView = {
         let tableView = UITableView()
+        tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -59,13 +56,13 @@ final class HomeView: UIView {
     private func setupConstraints() {
 
         NSLayoutConstraint.activate([
-            topStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 4),
+            topStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             topStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             topStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         ])
 
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo:  topStackView.bottomAnchor, constant: 4),
+            tableView.topAnchor.constraint(equalTo:  topStackView.bottomAnchor, constant: 16),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
@@ -86,6 +83,6 @@ extension HomeView: HomeViewType {
               delegate: UITableViewDelegate) {
         tableView.dataSource = dataSource
         tableView.delegate = delegate
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(HomeViewCell.self, forCellReuseIdentifier: "cell")
     }
 }
