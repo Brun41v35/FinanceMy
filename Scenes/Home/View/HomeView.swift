@@ -11,11 +11,20 @@ final class HomeView: UIView {
         return stackView
     }()
 
-    private let value: UILabel = {
+    private let informationLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        label.text = "Valor total"
+        label.adjustsFontForContentSizeCategory = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private let valueLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.text = "R$ 250,00"
         label.adjustsFontForContentSizeCategory = true
-        label.text = "TestTest"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -49,7 +58,8 @@ final class HomeView: UIView {
 
     private func setupViewHierarchy() {
         addSubview(topStackView)
-        topStackView.addArrangedSubview(value)
+        topStackView.addArrangedSubview(informationLabel)
+        topStackView.addArrangedSubview(valueLabel)
         addSubview(tableView)
     }
 

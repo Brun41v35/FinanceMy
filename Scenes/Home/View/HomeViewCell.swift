@@ -14,9 +14,30 @@ final class HomeViewCell: UITableViewCell {
 
     private let horizontalStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.distribution = .fillEqually
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+
+    private let leadingStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 16
+        stackView.distribution = .fillProportionally
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    private let trailingStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    private let iconImageView: UIImageView = {
+        let image = UIImage(systemName: "bag.circle.fill")?.withTintColor(.systemBackground, renderingMode: .alwaysOriginal)
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
 
     private let titlePaymentLabel: UILabel = {
@@ -27,6 +48,14 @@ final class HomeViewCell: UITableViewCell {
     }()
 
     private let valuePaymentLabel: UILabel = {
+        let label = UILabel()
+        label.text = "R$ 250,00"
+        label.textAlignment = .right
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private let label: UILabel = {
         let label = UILabel()
         label.text = "R$ 250,00"
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -55,8 +84,11 @@ final class HomeViewCell: UITableViewCell {
     private func setupViewHierarchy() {
         addSubview(containerView)
         containerView.addSubview(horizontalStackView)
-        horizontalStackView.addArrangedSubview(titlePaymentLabel)
-        horizontalStackView.addArrangedSubview(valuePaymentLabel)
+        horizontalStackView.addArrangedSubview(leadingStackView)
+        horizontalStackView.addArrangedSubview(trailingStackView)
+        leadingStackView.addArrangedSubview(iconImageView)
+        leadingStackView.addArrangedSubview(titlePaymentLabel)
+        trailingStackView.addArrangedSubview(valuePaymentLabel)
     }
 
     private func setupConstraints() {
@@ -68,10 +100,15 @@ final class HomeViewCell: UITableViewCell {
         ])
 
         NSLayoutConstraint.activate([
-            horizontalStackView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            horizontalStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            horizontalStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            horizontalStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            horizontalStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
+            horizontalStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+            horizontalStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
+            horizontalStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8)
+        ])
+
+        NSLayoutConstraint.activate([
+            iconImageView.heightAnchor.constraint(equalToConstant: 50),
+            iconImageView.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
 }
