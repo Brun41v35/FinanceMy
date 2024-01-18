@@ -43,6 +43,8 @@ final class HomeViewCell: UITableViewCell {
     private let titlePaymentLabel: UILabel = {
         let label = UILabel()
         label.text = "Gym"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -50,6 +52,8 @@ final class HomeViewCell: UITableViewCell {
     private let valuePaymentLabel: UILabel = {
         let label = UILabel()
         label.text = "R$ 250,00"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
