@@ -29,6 +29,15 @@ final class HomeView: UIView {
         return label
     }()
 
+    private let addPaymentButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("New Payment", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 8
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -61,6 +70,7 @@ final class HomeView: UIView {
         topStackView.addArrangedSubview(informationLabel)
         topStackView.addArrangedSubview(valueLabel)
         addSubview(tableView)
+        addSubview(addPaymentButton)
     }
 
     private func setupConstraints() {
@@ -69,6 +79,12 @@ final class HomeView: UIView {
             topStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             topStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             topStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+        ])
+
+        NSLayoutConstraint.activate([
+            addPaymentButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            addPaymentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
+            addPaymentButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         ])
 
         NSLayoutConstraint.activate([
