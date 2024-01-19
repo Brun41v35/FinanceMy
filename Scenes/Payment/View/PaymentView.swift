@@ -1,6 +1,10 @@
 import UIKit
 
-final class PaymentView: UIView {
+final class PaymentView: UIView, PaymentViewType {
+
+    // MARK: - Internal Properties
+
+    var didTapAddPayment: (() -> Void)?
 
     // MARK: - Private Properties
 
@@ -55,6 +59,7 @@ final class PaymentView: UIView {
         setupViewHierarchy()
         setupConstraints()
         setupBackgroundColor()
+        bindLayoutEvents()
     }
 
     private func setupViewHierarchy() {
@@ -80,5 +85,14 @@ final class PaymentView: UIView {
 
     private func setupBackgroundColor() {
         backgroundColor = .systemBackground
+    }
+
+    private func bindLayoutEvents() {
+        addPaymentButton.addTarget(self, action: #selector(addNewPayment), for: .touchUpInside)
+    }
+    
+    @objc
+    private func addNewPayment() {
+        didTapAddPayment?()
     }
 }
