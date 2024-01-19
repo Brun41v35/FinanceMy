@@ -33,7 +33,6 @@ final class HomeViewController: UIViewController {
 
     private func setup() {
         setupNavigationTitle()
-        setupNavigationRightBatButton()
         setupTableView()
     }
 
@@ -46,12 +45,6 @@ final class HomeViewController: UIViewController {
         title = "Payment List"
     }
 
-    private func setupNavigationRightBatButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"),
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(didTapAddPaymentButton))
-    }
 
     @objc
     private func didTapAddPaymentButton() {
