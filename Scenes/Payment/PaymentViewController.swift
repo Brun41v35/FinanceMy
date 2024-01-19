@@ -39,7 +39,7 @@ final class PaymentViewController: UIViewController {
     private func bindLayoutEvents() {
 
         contentView.didTapAddPayment = { [weak self] in
-            print("Alou")
+            self?.navigationController?.popViewController(animated: true)
         }
     }
 }
