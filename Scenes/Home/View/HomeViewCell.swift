@@ -42,7 +42,6 @@ final class HomeViewCell: UITableViewCell {
 
     private let titlePaymentLabel: UILabel = {
         let label = UILabel()
-        label.text = "Gym"
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -51,17 +50,9 @@ final class HomeViewCell: UITableViewCell {
 
     private let valuePaymentLabel: UILabel = {
         let label = UILabel()
-        label.text = "R$ 250,00"
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .right
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    private let label: UILabel = {
-        let label = UILabel()
-        label.text = "R$ 250,00"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -114,5 +105,15 @@ final class HomeViewCell: UITableViewCell {
             iconImageView.heightAnchor.constraint(equalToConstant: 50),
             iconImageView.widthAnchor.constraint(equalToConstant: 50)
         ])
+    }
+}
+
+// MARK: - HomeViewCellType
+
+extension HomeViewCell: HomeViewCellType {
+
+    func show(viewModel: PaymentViewModel) {
+        titlePaymentLabel.text = viewModel.name
+        valuePaymentLabel.text = viewModel.value
     }
 }
