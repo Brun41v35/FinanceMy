@@ -4,7 +4,7 @@ final class PaymentView: UIView, PaymentViewType {
 
     // MARK: - Internal Properties
 
-    var didTapAddPayment: (() -> Void)?
+    var didTapAddPayment: ((PaymentViewModel) -> Void)?
 
     // MARK: - Private Properties
 
@@ -93,6 +93,8 @@ final class PaymentView: UIView, PaymentViewType {
     
     @objc
     private func addNewPayment() {
-        didTapAddPayment?()
+        let model = PaymentViewModel(name: paymentNameTextField.text ?? "",
+                                     value: paymentValueTextField.text ?? "")
+        didTapAddPayment?(model)
     }
 }
