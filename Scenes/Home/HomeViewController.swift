@@ -34,6 +34,7 @@ final class HomeViewController: UIViewController {
     private func setup() {
         setupNavigationTitle()
         setupTableView()
+        bindLayoutEvents()
     }
 
     private func setupTableView() {
@@ -45,11 +46,21 @@ final class HomeViewController: UIViewController {
         title = "Payment List"
     }
 
+    private func bindLayoutEvents() {
+        contentView.didTapAddPayment = { [weak self] in
+            let controller = PaymentViewController()
+            controller.delegate = self
+            self?.navigationController?.present(controller, animated: true)
+        }
+    }
+}
 
-    @objc
-    private func didTapAddPaymentButton() {
-        let controller = PaymentViewController()
-        navigationController?.pushViewController(controller, animated: true)
+// MARK: - PaymentViewControllerDelegate
+
+extension HomeViewController: PaymentViewControllerDelegate {
+
+    func addNewPayment(model: PaymentViewModel) {
+        <#code#>
     }
 }
 

@@ -2,6 +2,10 @@ import UIKit
 
 final class HomeView: UIView {
 
+    // MARK: - Internal Properties
+
+    var didTapAddPayment: (() -> Void)?
+
     // MARK: - Private Properties
 
     private let topStackView: UIStackView = {
@@ -62,6 +66,7 @@ final class HomeView: UIView {
     private func setup() {
         setupViewHierarchy()
         setupConstraints()
+        bindLayoutEvents()
         setupBackgroundColor()
     }
 
@@ -95,8 +100,19 @@ final class HomeView: UIView {
         ])
     }
 
+    private func bindLayoutEvents() {
+        addPaymentButton.addTarget(self,
+                                   action: #selector(didTapAddPaymentButton),
+                                   for: .touchUpInside)
+    }
+
     private func setupBackgroundColor() {
         backgroundColor = .systemBackground
+    }
+
+    @objc
+    private func didTapAddPaymentButton() {
+        didTapAddPayment?()
     }
 }
 
