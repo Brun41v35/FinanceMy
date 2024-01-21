@@ -47,7 +47,6 @@ final class HomeViewCell: UITableViewCell {
         label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -57,8 +56,6 @@ final class HomeViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .right
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

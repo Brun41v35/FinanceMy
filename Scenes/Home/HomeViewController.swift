@@ -75,7 +75,7 @@ extension HomeViewController: PaymentViewControllerDelegate {
 extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return sectionsCell.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,7 +83,7 @@ extension HomeViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.selectionStyle = .none
-        cell.show(viewModel: PaymentViewModel(name: "TESTETESTETESTETESTEtetetetet", value: "10000"))
+        cell.show(viewModel: sectionsCell[indexPath.row])
         return cell
     }
 }
