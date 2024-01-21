@@ -29,6 +29,7 @@ final class HomeViewCell: UITableViewCell {
 
     private let trailingStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -44,6 +45,9 @@ final class HomeViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.adjustsFontForContentSizeCategory = true
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -53,6 +57,9 @@ final class HomeViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .right
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

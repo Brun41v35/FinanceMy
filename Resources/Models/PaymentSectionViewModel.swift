@@ -1,7 +1,7 @@
 import Foundation
 
 struct PaymentSectionViewModel: Equatable {
-    let sectionCells: [PaymentViewModel]
+    let sections: [PaymentViewModel]
 }
 
 struct PaymentViewModel: Equatable {

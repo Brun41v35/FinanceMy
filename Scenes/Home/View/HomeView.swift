@@ -88,7 +88,7 @@ final class HomeView: UIView {
 
         NSLayoutConstraint.activate([
             addPaymentButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            addPaymentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
+            addPaymentButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -12),
             addPaymentButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         ])
 
@@ -126,5 +126,6 @@ extension HomeView: HomeViewType {
         tableView.dataSource = dataSource
         tableView.delegate = delegate
         tableView.register(HomeViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.reloadData()
     }
 }

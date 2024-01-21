@@ -5,6 +5,7 @@ final class HomeViewController: UIViewController {
     // MARK: - Private Properties
 
     private let contentView: HomeViewType
+    private var sectionsCell = [PaymentViewModel]()
 
     // MARK: - Init
 
@@ -29,6 +30,11 @@ final class HomeViewController: UIViewController {
         setup()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setup()
+    }
+
     // MARK: - Private Methods
 
     private func setup() {
@@ -50,7 +56,7 @@ final class HomeViewController: UIViewController {
         contentView.didTapAddPayment = { [weak self] in
             let controller = PaymentViewController()
             controller.delegate = self
-            self?.navigationController?.present(controller, animated: true)
+            self?.navigationController?.pushViewController(controller, animated: true)
         }
     }
 }
@@ -59,8 +65,8 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: PaymentViewControllerDelegate {
 
-    func addNewPayment(model: PaymentViewModel) {
-        <#code#>
+    func addNewPayment(cell: PaymentViewModel) {
+        sectionsCell.append(cell)
     }
 }
 
@@ -69,11 +75,15 @@ extension HomeViewController: PaymentViewControllerDelegate {
 extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? HomeViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? HomeViewCell else {
+            return UITableViewCell()
+        }
+        cell.selectionStyle = .none
+        cell.show(viewModel: PaymentViewModel(name: "TESTETESTETESTETESTEtetetetet", value: "10000"))
         return cell
     }
 }

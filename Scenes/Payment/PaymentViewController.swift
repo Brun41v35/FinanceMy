@@ -1,7 +1,7 @@
 import UIKit
 
 protocol PaymentViewControllerDelegate: AnyObject {
-    func addNewPayment(model: PaymentViewModel)
+    func addNewPayment(cell: PaymentViewModel)
 }
 
 final class PaymentViewController: UIViewController {
@@ -45,9 +45,9 @@ final class PaymentViewController: UIViewController {
     }
 
     private func bindLayoutEvents() {
-        contentView.didTapAddPayment = { [weak self] model in
-            self?.dismiss(animated: true)
-            self?.delegate?.addNewPayment(model: model)
+        contentView.didTapAddPayment = { [weak self] cell in
+            self?.navigationController?.popViewController(animated: true)
+            self?.delegate?.addNewPayment(cell: cell)
         }
     }
 }
