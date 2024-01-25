@@ -5,6 +5,7 @@ final class HomeViewController: UIViewController {
     // MARK: - Private Properties
 
     private let contentView: HomeViewType
+    private var sectionsCell = [PaymentViewModel]()
 
     // MARK: - Init
 
@@ -29,12 +30,17 @@ final class HomeViewController: UIViewController {
         setup()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setup()
+    }
+
     // MARK: - Private Methods
 
     private func setup() {
         setupNavigationTitle()
-        setupNavigationRightBatButton()
         setupTableView()
+        bindLayoutEvents()
     }
 
     private func setupTableView() {
@@ -46,17 +52,21 @@ final class HomeViewController: UIViewController {
         title = "Payment List"
     }
 
-    private func setupNavigationRightBatButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"),
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(didTapAddPaymentButton))
+    private func bindLayoutEvents() {
+        contentView.didTapAddPayment = { [weak self] in
+            let controller = PaymentViewController()
+            controller.delegate = self
+            self?.navigationController?.present(controller, animated: true)
+        }
     }
+}
 
-    @objc
-    private func didTapAddPaymentButton() {
-        let controller = PaymentViewController()
-        navigationController?.pushViewController(controller, animated: true)
+// MARK: - PaymentViewControllerDelegate
+
+extension HomeViewController: PaymentViewControllerDelegate {
+
+    func addNewPayment(cell: PaymentViewModel) {
+        sectionsCell.append(cell)
     }
 }
 
@@ -65,11 +75,15 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return sectionsCell.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? HomeViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? HomeViewCell else {
+            return UITableViewCell()
+        }
+        cell.selectionStyle = .none
+        cell.show(viewModel: sectionsCell[indexPath.row])
         return cell
     }
 }

@@ -2,6 +2,10 @@ import UIKit
 
 final class HomeView: UIView {
 
+    // MARK: - Internal Properties
+
+    var didTapAddPayment: (() -> Void)?
+
     // MARK: - Private Properties
 
     private let topStackView: UIStackView = {
@@ -29,6 +33,15 @@ final class HomeView: UIView {
         return label
     }()
 
+    private let addPaymentButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("New Payment", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 8
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -53,6 +66,7 @@ final class HomeView: UIView {
     private func setup() {
         setupViewHierarchy()
         setupConstraints()
+        bindLayoutEvents()
         setupBackgroundColor()
     }
 
@@ -61,6 +75,7 @@ final class HomeView: UIView {
         topStackView.addArrangedSubview(informationLabel)
         topStackView.addArrangedSubview(valueLabel)
         addSubview(tableView)
+        addSubview(addPaymentButton)
     }
 
     private func setupConstraints() {
@@ -72,6 +87,12 @@ final class HomeView: UIView {
         ])
 
         NSLayoutConstraint.activate([
+            addPaymentButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            addPaymentButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            addPaymentButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+        ])
+
+        NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo:  topStackView.bottomAnchor, constant: 16),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
@@ -79,8 +100,19 @@ final class HomeView: UIView {
         ])
     }
 
+    private func bindLayoutEvents() {
+        addPaymentButton.addTarget(self,
+                                   action: #selector(didTapAddPaymentButton),
+                                   for: .touchUpInside)
+    }
+
     private func setupBackgroundColor() {
         backgroundColor = .systemBackground
+    }
+
+    @objc
+    private func didTapAddPaymentButton() {
+        didTapAddPayment?()
     }
 }
 
@@ -94,5 +126,6 @@ extension HomeView: HomeViewType {
         tableView.dataSource = dataSource
         tableView.delegate = delegate
         tableView.register(HomeViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.reloadData()
     }
 }

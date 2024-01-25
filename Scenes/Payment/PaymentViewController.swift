@@ -1,6 +1,14 @@
 import UIKit
 
+protocol PaymentViewControllerDelegate: AnyObject {
+    func addNewPayment(cell: PaymentViewModel)
+}
+
 final class PaymentViewController: UIViewController {
+
+    // MARK: - Internal Properties
+
+    weak var delegate: PaymentViewControllerDelegate?
 
     // MARK: - Private Properties
 
@@ -37,9 +45,13 @@ final class PaymentViewController: UIViewController {
     }
 
     private func bindLayoutEvents() {
-
-        contentView.didTapAddPayment = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+        contentView.didTapAddPayment = { [weak self] cell in
+            self?.dismiss(animated: true)
+            self?.delegate?.addNewPayment(cell: cell)
+        }
+        
+        contentView.didTapCloseButton = { [weak self] in
+            self?.dismiss(animated: true)
         }
     }
 }
