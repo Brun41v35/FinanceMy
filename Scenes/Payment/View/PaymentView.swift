@@ -5,8 +5,17 @@ final class PaymentView: UIView, PaymentViewType {
     // MARK: - Internal Properties
 
     var didTapAddPayment: ((PaymentViewModel) -> Void)?
+    var didTapCloseButton: (() -> Void)?
 
     // MARK: - Private Properties
+
+    private let containerView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.backgroundColor = .systemGray5
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     private lazy var mainStackView: UIStackView = {
         let stackView = UIStackView()
@@ -26,6 +35,7 @@ final class PaymentView: UIView, PaymentViewType {
     private lazy var paymentValueTextField: FYTextField = {
         let textField = FYTextField()
         textField.placeholder = "Valor"
+        textField.keyboardType = .numberPad
         textField.returnKeyType = .done
         return textField
     }()
@@ -37,6 +47,14 @@ final class PaymentView: UIView, PaymentViewType {
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.backgroundColor = .systemBlue
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    private lazy var closeButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(systemName: "xmark")
+        button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -63,17 +81,32 @@ final class PaymentView: UIView, PaymentViewType {
     }
 
     private func setupViewHierarchy() {
-        addSubview(mainStackView)
+        addSubview(closeButton)
+        addSubview(containerView)
+        containerView.addSubview(mainStackView)
         mainStackView.addArrangedSubview(paymentNameTextField)
         mainStackView.addArrangedSubview(paymentValueTextField)
         mainStackView.addArrangedSubview(addPaymentButton)
     }
 
     private func setupConstraints() {
+
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+            closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            closeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
+        ])
+
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 10),
+            containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+        ])
+
+        NSLayoutConstraint.activate([
+            mainStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
+            mainStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+            mainStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            mainStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16),
         ])
 
         NSLayoutConstraint.activate([
@@ -89,6 +122,7 @@ final class PaymentView: UIView, PaymentViewType {
 
     private func bindLayoutEvents() {
         addPaymentButton.addTarget(self, action: #selector(addNewPayment), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
     }
     
     @objc
@@ -96,5 +130,10 @@ final class PaymentView: UIView, PaymentViewType {
         let model = PaymentViewModel(name: paymentNameTextField.text ?? "",
                                      value: paymentValueTextField.text ?? "")
         didTapAddPayment?(model)
+    }
+
+    @objc
+    private func didTapClose() {
+        didTapCloseButton?()
     }
 }
