@@ -12,7 +12,7 @@ final class PaymentView: UIView, PaymentViewType {
     private let containerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 8
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = .systemGray6
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
