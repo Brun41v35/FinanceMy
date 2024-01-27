@@ -19,13 +19,11 @@ final class FYTextField: UITextField {
     private func setup() {
         textAlignment = .center
         layer.cornerRadius = 8
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.gray.cgColor
         textColor = .label
         tintColor = .label
         font = UIFont.systemFont(ofSize: 20)
         adjustsFontSizeToFitWidth = true
-        minimumFontSize = 12
+        minimumFontSize = 5
         backgroundColor = .systemBackground
         translatesAutoresizingMaskIntoConstraints = false
     }
