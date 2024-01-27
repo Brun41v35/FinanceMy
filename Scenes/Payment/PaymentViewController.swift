@@ -1,9 +1,5 @@
 import UIKit
 
-protocol PaymentViewControllerDelegate: AnyObject {
-    func addNewPayment(cell: PaymentViewModel)
-}
-
 final class PaymentViewController: UIViewController {
 
     // MARK: - Internal Properties
