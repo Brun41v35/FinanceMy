@@ -42,12 +42,8 @@ final class PaymentViewController: UIViewController {
 
     private func bindLayoutEvents() {
         contentView.didTapAddPayment = { [weak self] cell in
-            self?.dismiss(animated: true)
+            self?.navigationController?.popViewController(animated: true)
             self?.delegate?.addNewPayment(cell: cell)
-        }
-        
-        contentView.didTapCloseButton = { [weak self] in
-            self?.dismiss(animated: true)
         }
     }
 }

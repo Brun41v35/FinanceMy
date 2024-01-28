@@ -56,7 +56,7 @@ final class HomeViewController: UIViewController {
         contentView.didTapAddPayment = { [weak self] in
             let controller = PaymentViewController()
             controller.delegate = self
-            self?.navigationController?.present(controller, animated: true)
+            self?.navigationController?.pushViewController(controller, animated: true)
         }
     }
 }
