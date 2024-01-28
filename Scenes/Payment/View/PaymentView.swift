@@ -5,7 +5,6 @@ final class PaymentView: UIView, PaymentViewType {
     // MARK: - Internal Properties
 
     var didTapAddPayment: ((PaymentViewModel) -> Void)?
-    var didTapCloseButton: (() -> Void)?
 
     // MARK: - Private Properties
 
@@ -51,13 +50,6 @@ final class PaymentView: UIView, PaymentViewType {
         return button
     }()
 
-    private lazy var closeButton: UIButton = {
-        let button = UIButton()
-        let image = UIImage(systemName: "xmark")
-        button.setImage(image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
 
     // MARK: - Init
 
@@ -81,7 +73,6 @@ final class PaymentView: UIView, PaymentViewType {
     }
 
     private func setupViewHierarchy() {
-        addSubview(closeButton)
         addSubview(containerView)
         containerView.addSubview(mainStackView)
         mainStackView.addArrangedSubview(paymentNameTextField)
@@ -92,12 +83,7 @@ final class PaymentView: UIView, PaymentViewType {
     private func setupConstraints() {
 
         NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            closeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
-        ])
-
-        NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 10),
+            containerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
@@ -122,7 +108,6 @@ final class PaymentView: UIView, PaymentViewType {
 
     private func bindLayoutEvents() {
         addPaymentButton.addTarget(self, action: #selector(addNewPayment), for: .touchUpInside)
-        closeButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
     }
     
     @objc
@@ -130,10 +115,5 @@ final class PaymentView: UIView, PaymentViewType {
         let model = PaymentViewModel(name: paymentNameTextField.text ?? "",
                                      value: paymentValueTextField.text ?? "")
         didTapAddPayment?(model)
-    }
-
-    @objc
-    private func didTapClose() {
-        didTapCloseButton?()
     }
 }
