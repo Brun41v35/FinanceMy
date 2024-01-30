@@ -50,6 +50,7 @@ final class HomeViewController: UIViewController {
 
     private func setupNavigationTitle() {
         title = "Payment List"
+        navigationItem.backButtonTitle = ""
     }
 
     private func bindLayoutEvents() {
