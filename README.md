@@ -6,5 +6,5 @@ An application responsible for controlling payments and helping save money.
 * UIKit
 * XCTest
 * MVP
-* Coordinator (Desing Pattern)
+* Coordinator (Design Pattern)
 * CoreData
